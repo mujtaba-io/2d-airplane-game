@@ -1,0 +1,64 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://assets/popup_window.png" type="Texture2D" id=1]
+[ext_resource path="res://assets/game_over_text.png" type="Texture2D" id=2]
+[ext_resource path="res://game_over_window.gd" type="Script" id=4]
+
+[sub_resource type="FontFile" id=1]
+font_path = "res://assets/kenvector_future_thin.ttf"
+
+[sub_resource type="FontFile" id=2]
+outline_size = 1
+outline_color = Color( 0, 0.0627451, 0.145098, 1 )
+font_data = SubResource( 1 )
+
+[node name="game_over_window" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 1039.0
+offset_bottom = 612.0
+color = Color( 0.121569, 0.505882, 0.756863, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="popup" type="TextureRect" parent="."]
+offset_right = 1920.0
+offset_bottom = 1080.0
+scale = Vector2( 0.52, 0.52 )
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="game_over_text" type="TextureRect" parent="."]
+offset_left = 209.3
+offset_top = 68.974
+offset_right = 2129.3
+offset_bottom = 408.974
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 2 )
+
+[node name="replay_button" type="MenuButton" parent="."]
+offset_left = 300.0
+offset_top = 250.0
+offset_right = 500.0
+offset_bottom = 270.0
+scale = Vector2( 2, 2 )
+theme_override_fonts/font = SubResource( 2 )
+text = "Replay"
+
+[node name="mainmenu_button" type="MenuButton" parent="."]
+offset_left = 300.0
+offset_top = 300.0
+offset_right = 500.0
+offset_bottom = 320.0
+scale = Vector2( 2, 2 )
+theme_override_fonts/font = SubResource( 2 )
+text = "Back To Main Menu"

@@ -1,0 +1,71 @@
+[gd_scene load_steps=10 format=3 uid="uid://yjridncq22f4"]
+
+[ext_resource type="Script" path="res://Player/Player.gd" id="1_2e786"]
+[ext_resource type="Texture2D" uid="uid://q2ha5q6g2wr" path="res://assets/level1-plane-1.png" id="2_0853u"]
+[ext_resource type="PackedScene" uid="uid://b71u22nn2dybp" path="res://Bullet/Bullet.tscn" id="2_4662s"]
+[ext_resource type="Texture2D" uid="uid://cirsi7roi870m" path="res://assets/level1-plane-2.png" id="3_0m2qx"]
+[ext_resource type="Texture2D" uid="uid://dggnv37a0fmcn" path="res://assets/level1-plane-3.png" id="4_t82bp"]
+[ext_resource type="Texture2D" uid="uid://bcpjlk72nrr77" path="res://assets/level1-plane-4.png" id="5_84cnl"]
+[ext_resource type="FontFile" uid="uid://csx7dlrsvo7md" path="res://assets/font/04B_03__.TTF" id="6_kp3oa"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sm3ya"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_0853u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_0m2qx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_t82bp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_84cnl")
+}],
+"loop": true,
+"name": &"default",
+"speed": 32.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cleet"]
+radius = 18.0
+height = 96.0
+
+[node name="Player" type="RigidBody2D"]
+gravity_scale = 0.04
+linear_damp = 1.0
+script = ExtResource("1_2e786")
+bullet_scene = ExtResource("2_4662s")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(-0.3, 0.3)
+sprite_frames = SubResource("SpriteFrames_sm3ya")
+frame_progress = 0.799988
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(4, -1)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_cleet")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Coins" type="Label" parent="UI"]
+offset_left = 68.0
+offset_top = 20.0
+offset_right = 196.0
+offset_bottom = 52.0
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("6_kp3oa")
+theme_override_font_sizes/font_size = 32
+text = "Coins: 0"
+
+[node name="Kills" type="Label" parent="UI"]
+offset_left = 990.0
+offset_top = 20.0
+offset_right = 1098.0
+offset_bottom = 52.0
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("6_kp3oa")
+theme_override_font_sizes/font_size = 32
+text = "kills: 0"

@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/level1-hotairbaloon.png" type="Texture2D" id=1]
+[ext_resource path="res://hotairbaloon.gd" type="Script" id=2]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "level1-idle",
+"speed": 5.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 43.8442
+height = 9.05022
+
+[node name="hotairbaloon" type="RigidBody2D"]
+collision_layer = 4
+gravity_scale = 0.0
+script = ExtResource( 2 )
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2( 0.25, 0.25 )
+frames = SubResource( 1 )
+animation = "level1-idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 2.3811, -19.8425 )
+shape = SubResource( 2 )

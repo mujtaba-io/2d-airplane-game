@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cq50knxuh7my7"]
+[gd_scene load_steps=13 format=3 uid="uid://cq50knxuh7my7"]
 
 [ext_resource type="Script" path="res://World/World.gd" id="1_5cyge"]
 [ext_resource type="PackedScene" uid="uid://yjridncq22f4" path="res://Player/Player.tscn" id="2_vjn3s"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://jiqk6nf32e5c" path="res://assets/sky/3.png" id="5_sid13"]
 [ext_resource type="Shader" path="res://World/DottedGrid.gdshader" id="8_05eaq"]
 [ext_resource type="PackedScene" uid="uid://bl66jvk0rmpop" path="res://Coin/Coin.tscn" id="8_qe0rg"]
+[ext_resource type="FontFile" uid="uid://csx7dlrsvo7md" path="res://assets/font/04B_03__.TTF" id="9_4b3n3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uldll"]
 size = Vector2(3566, 73)
@@ -23,10 +24,24 @@ shader_parameter/offset = Vector2(0, 0)
 shader_parameter/anti_aliasing_factor = 0.0
 shader_parameter/stochastic_samples = 16
 
-[node name="World" type="Node2D"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c7077"]
+bg_color = Color(0.104863, 0.0567203, 0.0735259, 1)
+skew = Vector2(0.2, 0)
+corner_radius_top_left = 100
+corner_radius_top_right = 115
+corner_radius_bottom_left = 160
+corner_detail = 4
+shadow_size = 370
+anti_aliasing = false
+anti_aliasing_size = 0.01
+
+[node name="World" type="Node2D" node_paths=PackedStringArray("player", "game_over_panel", "player_death_timer")]
 script = ExtResource("1_5cyge")
 enemy_scene = ExtResource("3_7wodh")
 coin_scene = ExtResource("8_qe0rg")
+player = NodePath("Player")
+game_over_panel = NodePath("CanvasLayer/CenterContainer")
+player_death_timer = NodePath("")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -81,6 +96,34 @@ autostart = true
 material = SubResource("ShaderMaterial_ucbgw")
 offset_right = 1184.0
 offset_bottom = 696.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="CanvasLayer/CenterContainer"]
+custom_minimum_size = Vector2(256, 128)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_c7077")
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/CenterContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/CenterContainer/Panel/CenterContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("9_4b3n3")
+theme_override_font_sizes/font_size = 32
+text = "Game Over :("
 
 [connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_enemy_spawn_timer_timeout"]
 [connection signal="timeout" from="CoinSpawnTimer" to="." method="_on_coin_spawn_timer_timeout"]

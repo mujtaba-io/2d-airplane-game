@@ -4,6 +4,10 @@ extends Node2D
 @export var spawn_offset: float = 64
 
 @export var coin_scene: PackedScene
+@export var player: Node2D
+
+@export var game_over_panel: Control
+@export var player_death_timer: Timer
 
 
 func _process(delta):
@@ -11,6 +15,11 @@ func _process(delta):
 	$ParallaxBackground/ParallaxLayer.motion_offset += Vector2(-0.15, 0)
 	$ParallaxBackground/ParallaxLayer2.motion_offset += Vector2(-0.3, 0)
 	$ParallaxBackground/ParallaxLayer3.motion_offset += Vector2(-0.6, 0)
+	
+	if player.position.x < 0:
+		game_over_panel.visible = true
+	else:
+		game_over_panel.visible = false
 
 
 func _on_enemy_spawn_timer_timeout():
